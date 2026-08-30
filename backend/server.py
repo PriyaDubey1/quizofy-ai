@@ -33,7 +33,8 @@ GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
 JWT_ALGO = "HS256"
 JWT_EXPIRE_DAYS = 30
 
-client = AsyncIOMotorClient(MONGO_URL)
+import certifi
+client = AsyncIOMotorClient(MONGO_URL, tlsCAFile=certifi.where())
 db = client[DB_NAME]
 
 app = FastAPI(title="Quizofy AI")
